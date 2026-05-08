@@ -19,7 +19,6 @@ const Search = () => {
       setLoading(true);
       try {
         const data = await searchMedia(query);
-        // Filter out people, only keep movies and tv
         const filteredResults = data.results.filter(
           item => item.media_type === 'movie' || item.media_type === 'tv'
         );

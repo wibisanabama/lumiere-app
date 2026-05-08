@@ -4,7 +4,6 @@ import './MediaCard.css';
 const MediaCard = ({ media }) => {
   const { id, title, name, poster_path, media_type, vote_average, release_date, first_air_date } = media;
   
-  // TV shows use 'name', movies use 'title'
   const displayTitle = title || name;
   const type = media_type || (title ? 'movie' : 'tv');
   const date = release_date || first_air_date;

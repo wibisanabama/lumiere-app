@@ -73,7 +73,7 @@
 }
 
 .scroll-item {
-  flex: 0 0 200px; /* Fixed width for items in horizontal scroll */
+  flex: 0 0 200px;
 }
 
 .loader {
