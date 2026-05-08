@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          Lumière <span>Explorer</span>
+          Lumiere
         </Link>
         <form className="navbar-search" onSubmit={handleSearch}>
           <input

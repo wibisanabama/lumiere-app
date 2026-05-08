@@ -28,7 +28,7 @@ const Home = () => {
     <div className="home-page">
       <header className="hero-section">
         <div className="hero-content">
-          <h1>Welcome to Lumière Explorer</h1>
+          <h1>Welcome to Lumiere</h1>
           <p>Discover the most trending movies and TV series right now.</p>
         </div>
       </header>
