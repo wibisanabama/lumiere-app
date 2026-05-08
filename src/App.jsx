@@ -17,7 +17,8 @@ function App() {
         </Routes>
       </main>
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Lumière Explorer. Powered by TMDB API.</p>
+        <p>&copy; {new Date().getFullYear()} Lumiere - All right reserved</p>
+        <p>Powered by <a href="https://developer.themoviedb.org/docs/getting-started" target="_blank" rel="noopener noreferrer">TMDB API</a></p>
       </footer>
     </div>
   );
