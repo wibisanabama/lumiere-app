@@ -24,4 +24,9 @@ export const getDetails = async (mediaType, id) => {
   return response.data;
 };
 
+export const getPopular = async (mediaType = 'movie') => {
+  const response = await tmdbApi.get(`/${mediaType}/popular`);
+  return response.data;
+};
+
 export default tmdbApi;

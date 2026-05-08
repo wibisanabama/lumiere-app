@@ -4,7 +4,7 @@
 
 .hero-section {
   background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1925&q=80') center/cover;
-  padding: 100px 20px;
+  padding: 80px 20px;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -31,38 +31,56 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
-.trending-section h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
+.media-section {
+  margin-bottom: 50px;
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 1.8rem;
+  color: #fff;
   position: relative;
   display: inline-block;
 }
 
-.trending-section h2::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 50%;
-  height: 4px;
-  background: #38bdf8;
-  border-radius: 2px;
+.horizontal-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 5px 20px 5px;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
-.media-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
+.horizontal-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+.scroll-item {
+  flex: 0 0 200px; /* Fixed width for items in horizontal scroll */
 }
 
 .loader {
   text-align: center;
   font-size: 1.2rem;
   color: #38bdf8;
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .error {
@@ -77,5 +95,9 @@
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 2.5rem;
+  }
+  
+  .scroll-item {
+    flex: 0 0 160px;
   }
 }

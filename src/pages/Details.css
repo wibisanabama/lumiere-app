@@ -29,17 +29,27 @@
 }
 
 .back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.1);
   color: #38bdf8;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
   text-decoration: none;
   font-weight: 600;
   margin-bottom: 30px;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
 }
 
 .back-link:hover {
-  color: #0ea5e9;
-  text-decoration: underline;
+  background: #38bdf8;
+  color: #0f172a;
+  transform: translateX(-5px);
 }
 
 .details-content {

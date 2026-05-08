@@ -1,13 +1,28 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Details from './pages/Details';
 import Search from './pages/Search';
 import './App.css';
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  const navType = useNavigationType();
+
+  useEffect(() => {
+    if (navType !== 'POP') {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, navType]);
+
+  return null;
+};
+
 function App() {
   return (
     <div className="app-container">
+      <ScrollToTop />
       <Navbar />
       <main className="main-content">
         <Routes>

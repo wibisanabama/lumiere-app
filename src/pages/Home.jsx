@@ -1,52 +1,88 @@
 import { useState, useEffect } from 'react';
-import { getTrending } from '../api/tmdb';
+import { getTrending, getPopular } from '../api/tmdb';
 import MediaCard from '../components/MediaCard';
 import './Home.css';
 
+let cachedHomeData = null;
+
 const Home = () => {
-  const [trending, setTrending] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(cachedHomeData || {
+    trendingMovies: [],
+    trendingSeries: [],
+    popularMovies: [],
+    popularSeries: []
+  });
+  const [loading, setLoading] = useState(!cachedHomeData);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTrending = async () => {
+    const fetchAllData = async () => {
+      if (cachedHomeData) return;
+      
       try {
-        const data = await getTrending('all', 'day');
-        setTrending(data.results);
+        const [tMovies, tSeries, pMovies, pSeries] = await Promise.all([
+          getTrending('movie', 'day'),
+          getTrending('tv', 'day'),
+          getPopular('movie'),
+          getPopular('tv')
+        ]);
+
+        const newData = {
+          trendingMovies: tMovies.results,
+          trendingSeries: tSeries.results,
+          popularMovies: pMovies.results,
+          popularSeries: pSeries.results
+        };
+        
+        cachedHomeData = newData;
+        setData(newData);
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching trending data:", err);
-        setError('Failed to fetch trending media.');
+        console.error("Error fetching home data:", err);
+        setError('Failed to fetch media data.');
         setLoading(false);
       }
     };
 
-    fetchTrending();
+    fetchAllData();
   }, []);
+
+  const Section = ({ title, items }) => (
+    <section className="media-section">
+      <div className="section-header">
+        <h2>{title}</h2>
+      </div>
+      <div className="horizontal-scroll">
+        {items.map((media) => (
+          <div key={media.id} className="scroll-item">
+            <MediaCard media={media} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 
   return (
     <div className="home-page">
       <header className="hero-section">
         <div className="hero-content">
           <h1>Welcome to Lumiere</h1>
-          <p>Discover the most trending movies and TV series right now.</p>
+          <p>Explore the best movies and TV series across the globe.</p>
         </div>
       </header>
 
       <main className="container">
-        <section className="trending-section">
-          <h2>Trending Today</h2>
-          {loading && <div className="loader">Loading...</div>}
-          {error && <div className="error">{error}</div>}
-          
-          {!loading && !error && (
-            <div className="media-grid">
-              {trending.map((media) => (
-                <MediaCard key={media.id} media={media} />
-              ))}
-            </div>
-          )}
-        </section>
+        {loading && <div className="loader">Loading Explorer...</div>}
+        {error && <div className="error">{error}</div>}
+        
+        {!loading && !error && (
+          <>
+            <Section title="Trending Movies" items={data.trendingMovies} />
+            <Section title="Trending Series" items={data.trendingSeries} />
+            <Section title="Popular Movies" items={data.popularMovies} />
+            <Section title="Popular Series" items={data.popularSeries} />
+          </>
+        )}
       </main>
     </div>
   );
